@@ -3,6 +3,8 @@
 新增功能 :
 
 1. 減少使用 location.reload();
+2. 改用$(dom).html(res)，之類的直接修改
+3. dom 直接修改，畫面不會重整，所以不會跳來跳去
     * ex :
     ```
         function edit(dom,id){
@@ -14,9 +16,13 @@
             }
         }
     ```
-2. 改用$(dom).hrml(res)
-3. Ajax 直接修改，畫面不會重整，所以不會跳來跳去
 4. 新增最新消息管理
+
+    * 相關back :
+        1. 新增兩隻API
+            * 刪除用ajax與dom api/ad_del.php
+            * form 修改 api/news.php
+            
     * 相關front :
         1. index.php marquee
         2. news.php 最新消息區

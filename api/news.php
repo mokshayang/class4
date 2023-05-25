@@ -18,5 +18,5 @@ if(isset($_POST['add']) ){
         }
     }
 }
-// to("../admin.php?do=news");
+to("../admin.php?do=news");
 
