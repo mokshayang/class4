@@ -9,19 +9,20 @@
         <td>操作</td>
     </tr>
     <?php 
-    $rows=$Ord->all();
+    $rows = $Ord->all();
     foreach($rows as $row){
     ?>
     <tr class="ct pp">
-        <td><a href="?do=detail&id=<?=$row['id']?>"><?=$row['no']?></a></td>
+        <td>
+            <a href="?do=detail&id=<?=$row['id']?>"><?=$row['no']?></a>
+        </td>
         <td><?=$row['total']?></td>
         <td><?=$row['acc']?></td>
         <td><?=$row['name']?></td>
         <td><?=$row['date']?></td>
         <td>
-            <button onclick="del('ord',<?=$row['id']?>)">刪除</button>
+            <button type="button" onclick="del('ord',<?=$row['id']?>)">刪除</button>
         </td>
     </tr>
     <?php } ?>
 </table>
-

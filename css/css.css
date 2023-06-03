@@ -31,11 +31,11 @@ body
 {
 	display:block;
 	padding:15px 5px 15px 5px;
+	border-radius: 10px;
 	text-decoration:none;
 	background:#F4C591;
 	margin:10px auto 10px auto;
 	color:#65350A;
-	border-radius: 10px;
 }
 .ct
 {
@@ -105,20 +105,17 @@ input[type=text],input[type=password]
 {
 	display:none;
 }
+#left .s a{
+	margin-left: 30px;
+	background-color: #cc0;
+}
 div.ww:hover > div.s
 {
 	display:block;
-	margin-left: 30px;
-}
-#left .s a{
-	background-color: #cc0;
 }
 .sb button
 {
 	font-size:12px;
-}
-button {
-	cursor: pointer;
 }
 .cu{
 	cursor: pointer;

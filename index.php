@@ -1,4 +1,4 @@
-<?php include_once "api/base.php" ?>
+<?php include_once "api/base.php"; ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <!-- saved from url=(0039) -->
 <html xmlns="http://www.w3.org/1999/xhtml">
@@ -8,8 +8,8 @@
 
     <title>┌精品電子商務網站」</title>
     <link href="./css/css.css" rel="stylesheet" type="text/css">
-    <script src="./js/jquery-3.4.1.min.js"></script>
     <script src="./js/js.js"></script>
+    <script src="./js/jquery-3.4.1.min.js"></script>
 </head>
 
 <body>
@@ -17,9 +17,9 @@
     <div id="main">
         <div id="top">
             <a href="?">
-                <img src="./icon/0416.jpg" style="width:56%">
+                <img src="./icon/0416.jpg" style="width:58%;">
             </a>
-            <div style="padding:10px;display:inline;vertical-align:top">
+            <div style="padding:10px;vertical-align:top;float:right;display:inline">
                 <a href="?">回首頁</a> |
                 <a href="?do=news">最新消息</a> |
                 <a href="?do=look">購物流程</a> |
@@ -31,18 +31,18 @@
                     echo "<a href='?do=login'>會員登入</a> | ";
                 }
                 if (isset($_SESSION['admin'])) {
-                    echo "<a href='admin.php?do=admin'>返回管理</a>";
+
+                    echo "<a href='admin.php'>返回管理</a>";
                 } else {
                     echo "<a href='?do=admin'>管理登入</a>";
                 }
                 ?>
             </div>
-            <!-- <marquee scrollamount="12">情人節特惠活動 &nbsp;&nbsp; 年終特賣會開跑了</marquee> -->
             <marquee scrollamount="12">
-                <?php 
-                $rows = $Ad->all(['sh'=>1]);
-                foreach($rows as $row){
-                    echo $row['text']."&nbsp;&nbsp;&nbsp;&nbsp;";
+                <?php
+                $ads = $Ad->all(['sh' => 1]);
+                foreach ($ads as $ad) {
+                    echo $ad['text'] . "&nbsp;&nbsp;&nbsp;&nbsp;";
                 }
                 ?>
             </marquee>
@@ -88,7 +88,6 @@
             頁尾版權 : <?= $bot['text'] ?>
         </div>
     </div>
-
 </body>
 
 </html>

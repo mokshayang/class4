@@ -21,7 +21,7 @@ class DB
     }
     function arrSql($array){
         foreach ($array as $key => $value) {
-            $tmp[] = "`$key`='$value'";
+            $tmp[] = "`$key` = '$value'";
         }
         return $tmp;
     }
@@ -30,7 +30,7 @@ class DB
         if(isset($arg[0])){
             if(is_array($arg[0])){
                 $tmp = $this->arrSql($arg[0]);
-                $sql .="where ".join(" && ",$tmp);
+                $sql .= "where ".join(" && ",$tmp);
             }else{
                 $sql .= $arg[0];
             }
@@ -45,7 +45,7 @@ class DB
         if(isset($arg[0])){
             if(is_array($arg[0])){
                 $tmp = $this->arrSql($arg[0]);
-                $sql .="where ".join(" && ",$tmp);
+                $sql .= "where ".join(" && ",$tmp);
             }else{
                 $sql .= $arg[0];
             }
@@ -59,7 +59,7 @@ class DB
         $sql = "select * from $this->table ";
         if(is_array($id)){
             $tmp = $this->arrSql($id);
-            $sql .="where ".join(" && ",$tmp);
+            $sql .= "where ".join(" && ",$tmp);
         }else{
             $sql .="where id = $id";
         }
@@ -69,16 +69,14 @@ class DB
         $sql = "delete from $this->table ";
         if(is_array($id)){
             $tmp = $this->arrSql($id);
-            $sql .="where ".join(" && ",$tmp);
+            $sql .= "where ".join(" && ",$tmp);
         }else{
             $sql .="where id = $id";
         }
-        // echo $sql;
         return $this->pdo->exec($sql);
     }
     function ddd(){
         $sql = "delete from $this->table ";
-        // echo $sql;
         return $this->pdo->exec($sql);
     }
     function save($array){
@@ -92,7 +90,7 @@ class DB
         }else{
             $col = array_keys($array);
             $sql = "insert into $this->table (`".join("`,`",$col)."`)
-                                    values ('".join("','",$array)."')";
+                                values ('".join("','",$array)."')";
         }
         return $this->pdo->exec($sql);
     }
@@ -120,11 +118,12 @@ class DB
         return $this->pdo->query($sql)->fetchColumn();
     }
 }
-$Admin = new DB('admin');
-$Mem = new DB('mem');
-$Goods = new DB('goods');
-$Type = new DB('type');
-$Ord = new DB('ord');
-$Ad = new DB('ad');
-$Bottom = new DB('bottom');
+$Admin = new DB("admin");
+$Mem = new DB("mem");
+$Type = new DB("type");
+$Goods = new DB("goods");
+$Ad = new DB("ad");
+$Bottom = new DB("bottom");
+$Ord = new DB("ord");
 $bot = $Bottom->find(1);
+$test = $Admin->avg('id');
