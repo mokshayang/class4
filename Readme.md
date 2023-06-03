@@ -6,7 +6,7 @@
 2. 改用$(dom).html(res)，之類的直接修改
 3. dom 直接修改，畫面不會重整，所以不會跳來跳去
     * ex :
-    ```
+    ```JS
         function edit(dom,id){
             let name = prompt("請修改名稱",$(dom).parent().prev().text());
             if(name){
@@ -102,6 +102,7 @@
         })
     }
     </script>
+    ```
     
     ## 這樣的話會無效 : 
     
