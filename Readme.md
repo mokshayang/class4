@@ -78,4 +78,46 @@
     }
     </script>
     ```
-12. 其他不變
+12. 說明一下遇到的問題 : 
+
+    ```Js
+    <script>
+    function remove(dom, id) {
+        let div = `
+        <br> 您的購物車是空的 <br><br>
+                <a href="?do=index.php">
+                    <img src="icon/0411.jpg" class="cu" style="width:100px">
+                </a>
+                `
+        let table = $('.all');
+        let row = table.find('.content');
+        $.post("api/remove.php", {id},()=>{
+            $(dom).parents('tr').remove();
+            history.pushState(null, null, "?do=cart");
+            if (row.length == 0) {
+                $('#sub').empty().append(div)
+            }
+        })
+    }
+    </script>
+    
+    ## 這樣的話會無效 : 
+    
+    ### 順序關係 :
+        * row 是在 Ajax 请求回調函數之外的 作用域内 定義和獲取的。
+            * let 的作用域
+        * 在此情况下，AJAX 檢查 row.length 时，仍然保持 Ajax 發前的狀態，可能判断錯誤
+
+    ## Ajax 特性 :
+
+        1. 請求尚未完成：如果 Ajax 的請求過程尚未結束，
+           這時候  程式會繼續往下執行 程式會繼續往下執行 *N，  
+           在此时檢查 row.length 的值可能得到不準確的结果，
+           因為無法判斷何時會完成 ~~
+        
+        2. 因此，在 AJAX 請求完成之前，檢查 row.length 可能不會正確反映 .content 元素的實際狀態。
+
+        3. 非同步操作導致的延遲：
+            * 由于 AJAX 請求是非同步操作，可能在請求完成之前的短暂延遲
+            * remove() 函數中 $('#sub').empty().append(div) 时，而此時可能仍然存在 .content 元素。
+    註 : 上課時有提過，寫出來 + 深印象
