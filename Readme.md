@@ -31,4 +31,51 @@
 7. 簡化商品的聯動選單 將 'parent' 帶入 ajax
 8. 後續有空的話，會修改UI介面，有空的話 。。。。
 9. 還不會與銀行的API，這個要問一下經驗的
-10. 測試一個修改
+10. 強化地6項功能 : 在確定送出訂單後的API ， 將
+
+    ```php
+    unset($_SESSION['cart']);
+    改為
+    $_SESSION['cart'] = array();
+    ```
+
+11. 前端購物車，修改下方兩個按鈕，以及刪除後 的顯示
+
+    ```php
+    <div class="ct" id="sub">
+    <?php 
+    if(empty($qt)){
+    ?>
+    <br> 您的購物車是空的 <br><br>
+    <a href="?do=index.php"><img src="icon/0411.jpg" class="cu" style="width:100px"></a>
+    <?php }else{ ?>
+    <a href="?do=index.php"><img src="icon/0411.jpg" class="cu" style="width:100px"></a>
+    <a href="?do=ord"><img src="icon/0412.jpg" class="cu" style="width:100px"></a>
+    <?php } ?>
+    </div>
+    ```
+
+    ```Js
+    <script>
+    function remove(dom, id) {
+        let div = `
+        <br> 您的購物車是空的 <br><br>
+                <a href="?do=index.php">
+                    <img src="icon/0411.jpg" class="cu" style="width:100px">
+                </a>
+                `
+        $.post("api/remove.php", {
+            id
+        }, () => {
+            $(dom).parents('tr').remove();
+            history.pushState(null, null, "?do=cart");
+            let table = $('.all');
+            let row = table.find('.content');
+            if (row.length == 0) {
+                $('#sub').empty().append(div)
+            }
+        })
+    }
+    </script>
+    ```
+12. 其他不變
