@@ -1,14 +1,14 @@
 <h2 class="ct">最新消息</h2>
 <table class="all">
-    <tr class="ct tt">
+    <tr class="tt ct">
         <td>標題</td>
     </tr>
     <?php
-      $ads = $Ad->all(['sh'=>1]);
-      foreach($ads as $ad){    
+    $rows = $Ad->all(['sh' => 1]);
+    foreach ($rows as $row) {
     ?>
-    <tr class="ct pp">
-        <td><?=$ad['text']?></td>
-    </tr>
+        <tr class="pp ct">
+            <td><?= $row['text'] ?></td>
+        </tr>
     <?php } ?>
 </table>
