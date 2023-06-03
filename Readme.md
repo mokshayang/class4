@@ -37,6 +37,8 @@
     unset($_SESSION['cart']);
     改為
     $_SESSION['cart'] = array();
+    或者 :
+    $_SESSION['cart'] = [];
     ```
 
 11. 前端購物車，修改下方兩個按鈕，以及刪除後 的顯示
