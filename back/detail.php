@@ -1,17 +1,22 @@
 <?php
-$row = $Ord->find(['acc' => $_SESSION['mem']]);
+$row = $Ord->find(['id'=>$_GET['id']]);
 $cart = unserialize($row['cart']);
 ?>
+<h2 class="ct">訂單編號<?=$row['no']?>的詳細資料</h2>
+<?php
+$row = $Mem->find(['acc' => $_SESSION['mem']]);
+?>
+
 <style>
 .all{
-    margin: -2px auto;
+    margin: -1px auto;
 }
 .all input{
     border: 0;
     background-color: transparent;
 }
 </style>
-<h2 class="ct">填寫資料</h2>
+
 <table class="all">
     <tr>
         <td class="ct tt">個人帳號</td>
@@ -74,12 +79,9 @@ $cart = unserialize($row['cart']);
 </table>
 <table class="all">
     <tr class="ct tt">
-        <td>
-            總價: <?=$sum?>
-        </td>
+        <td> 總價: <?=$sum?> </td>
     </tr>
 </table>
 <div class="ct">
-   
     <button onclick="of('?do=ord')">返回</button>
 </div>

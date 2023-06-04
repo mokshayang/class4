@@ -9,7 +9,10 @@ if (!isset($_SESSION['mem'])) {
 
 ?>
 <style>
-
+    .num {
+        border: 0;
+        background-color: transparent;
+    }
 </style>
 <h2 class="ct"><?= $_SESSION['mem'] ?>的購物車</h2>
 <table class="all">
@@ -26,17 +29,21 @@ if (!isset($_SESSION['mem'])) {
     <?php
     foreach ($_SESSION['cart'] as $id => $qt) {
         $row = $Goods->find($id);
+        // // 檢查是否已經在 $_SESSION['cart'] 中，如果不在，則添加該商品
+        // if (!isset($_SESSION['cart'][$id])) {
+        //     $_SESSION['cart'][$id] = $qt;
+        // }
     ?>
         <tr class="ct pp content">
             <td><?= $row['no'] ?></td>
             <td><?= $row['name'] ?></td>
             <td>
-                <input type="text" id="<?=$id?>" value="<?=$qt?>" onchange="num(<?=$id?>)" style="width:40px;">
+                <input type="text" id="<?= $id ?>" value="<?= $qt ?>" onchange="num(<?= $id ?>)" style="width:40px;">
             </td>
             <td><?= $row['stock'] ?></td>
             <td><?= $row['price'] ?></td>
             <td><?= $row['price'] * $qt ?></td>
-            <td>
+            <td class="num">
                 <img src="icon/0415.jpg" class="cu" onclick="remove(this,<?= $row['id'] ?>)">
             </td>
         </tr>
@@ -44,25 +51,29 @@ if (!isset($_SESSION['mem'])) {
 </table>
 
 <div class="ct" id="sub">
-    <?php 
-    if(empty($qt)){
+    <?php
+    if (empty($qt)) {
     ?>
-    <br> 您的購物車是空的 <br><br>
-    <a href="?do=index.php"><img src="icon/0411.jpg" class="cu" style="width:100px"></a>
-    <?php }else{ ?>
-    <a href="?do=index.php"><img src="icon/0411.jpg" class="cu" style="width:100px"></a>
-    <a href="?do=ord"><img src="icon/0412.jpg" class="cu" style="width:100px"></a>
+        <br> 您的購物車是空的 <br><br>
+        <a href="?do=index.php"><img src="icon/0411.jpg" class="cu" style="width:100px"></a>
+    <?php } else { ?>
+        <a href="?do=index.php"><img src="icon/0411.jpg" class="cu" style="width:100px"></a>
+        <a href="?do=ord"><img src="icon/0412.jpg" class="cu" style="width:100px"></a>
     <?php } ?>
 </div>
 
 
 
 <script>
-        function num(id){
-        let num = $('#'+id).val();
+    function num(id) {
+        let num = $('#' + id).val();
         console.log(num);
-        $.post("api/num.php",{id,num})
+        $.post("api/num.php", {
+            id,
+            num
+        })
     }
+
     function remove(dom, id) {
         let div = `
         <br> 您的購物車是空的 <br><br>
@@ -70,7 +81,9 @@ if (!isset($_SESSION['mem'])) {
                     <img src="icon/0411.jpg" class="cu" style="width:100px">
                 </a>
                 `
-        $.post("api/remove.php", {id}, () => {
+        $.post("api/remove.php", {
+            id
+        }, () => {
             $(dom).parents('tr').remove();
             history.pushState(null, null, "?do=cart");
             let table = $('.all');
