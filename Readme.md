@@ -131,33 +131,38 @@
 
     ## 更改項目 :
     ```php
-    <?php
-        foreach ($_SESSION['cart'] as $id => $qt) {
-        $row = $Goods->find($id);
-    ?>
-    <tr class="ct pp content">
-        <td><?= $row['no'] ?></td>
-        <td><?= $row['name'] ?></td>
-        <td class="num">
-            <input type="text" id="<?= $id ?>" value="<?= $qt ?>" onchange="num(<?=$id ?>)" style="width:40px;">
-        </td>
-        <td><?= $row['stock'] ?></td>
-        <td><?= $row['price'] ?></td>
-        <td><?= $row['price'] * $qt ?></td>
-        <td class="num">
-            <img src="icon/0415.jpg" class="cu" onclick="remove(this,<?= $ro['id'] ?>)">
-        </td>
-    </tr>
-    <?php } ?>
+        <?php
+            foreach ($_SESSION['cart'] as $id => $qt) {
+            $row = $Goods->find($id);
+        ?>
+        <tr class="ct pp content">
+            <td><?= $row['no'] ?></td>
+            <td><?= $row['name'] ?></td>
+            <td class="num">
+                <input type="text" id="<?= $id ?>" value="<?= $qt ?>" onchange="num(<?= $id ?>)" style="width:40px;">
+            </td>
+            <td><?= $row['stock'] ?></td>
+            <td><?= $row['price'] ?></td>
+            <td><?= $row['price'] * $qt ?></td>
+            <td class="num">
+                <img src="icon/0415.jpg" class="cu" onclick="remove(this,<?= $row['id'] ?>)">
+            </td>
+        </tr>
+        <?php } ?>
+
     ```
 
     <!-- 修改了 :  -->
+
+    ```html
     <td class="num">
-
-        <input type="text" id="<?= $id ?>" value="<?= $qt ?>" onchange="num(<?= $id ?>)" style="width:40px;">
-
+        <input type="text" id="<?= $id ?>" 
+                value="<?= $qt ?>" 
+                onchange="num(<?= $id ?>)" 
+                style="width:40px;">
     </td>
     ```
+
     ## 在jq:
     ```js
     function num(id) {
@@ -172,27 +177,27 @@
     ```
     ### 在js中要崁入PHP 還OK，但是PHP中要崁入JS ，好麻煩 !!
 
-    #### 這邊為了抓foreach的$id 的dom :
+    ### 這邊為了抓foreach的$id 的dom :
 
-        * 在設計上 : 為了抓到 foreach 迴圈中的dom 將id設為foreach中的id
+    ### 在設計上 : 為了抓到 foreach 迴圈中的dom 將id設為foreach中的id
 
     ```html
     <td class="num">
     <input type="text" id="<?=$id?>" value="<?=$qt?>" onchange="num(<?=$id?>)"style="width:40px;">
     </td>
     ```
-        ### 要注意的是 JS
+    ### 要注意的是 JS
 
     ```js
     let num = $('#' + id).val();
     // $('#' + id) 這樣id 才會是變數
     ```
 
-        * 採用了ajax，好處是 : 
-            1. api 中 統一了PHP語言 $.post("api/num.php",{...})...
-            2. 可以重新定義購物車
-        抓到的DOM送出ajax
+    ## 採用了ajax，好處是 : 
+        1. api 中 統一了PHP語言 $.post("api/num.php",{...})...
+        2. 可以重新定義購物車
 
+    抓到的 DOM 送出ajax
     ```js
     function num(id) {
     let num = $('#' + id).val();
