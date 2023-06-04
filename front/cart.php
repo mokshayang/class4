@@ -39,7 +39,7 @@ if (!isset($_SESSION['mem'])) {
             <td><?= $row['stock'] ?></td>
             <td><?= $row['price'] ?></td>
             <td><?= $row['price'] * $qt ?></td>
-            <td class="num">
+            <td >
                 <img src="icon/0415.jpg" class="cu" onclick="remove(this,<?= $row['id'] ?>)">
             </td>
         </tr>

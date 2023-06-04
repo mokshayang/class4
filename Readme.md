@@ -144,17 +144,15 @@
             <td><?= $row['stock'] ?></td>
             <td><?= $row['price'] ?></td>
             <td><?= $row['price'] * $qt ?></td>
-            <td class="num">
+            <td>
                 <img src="icon/0415.jpg" class="cu" onclick="remove(this,<?= $row['id'] ?>)">
             </td>
         </tr>
         <?php } ?>
 
     ```
-
-    <!-- 修改了 :  -->
-
     ```html
+    <!-- 修改了 :  -->
     <td class="num">
         <input type="text" id="<?= $id ?>" 
                 value="<?= $qt ?>" 
