@@ -245,9 +245,10 @@
     為了搭配 ， 使用者在登入會員時候，會直接點選購物車
     下方的按鈕也要增加條件判斷
 
-    ```php
+```php
+
 <div class="ct ord">
-    <?php
+<?php
     if(empty($qt) || !isset($_SESSION['cart'])){
     ?>
         <br>您的購物車是空的<p></p>
@@ -257,7 +258,8 @@
         <a href="?do=ord"><img src="icon/0412.jpg" class="bbt"></a>
     <?php } ?>
 </div>
-    ```
+
+```
 
     ## 名稱也做了修改
 
@@ -269,7 +271,7 @@
         url.searchParams.set('qt', num);
         history.pushState(null, null, url.toString());
         }
-        
+
         function remove(dom,id){
         let div = `
                     <br>您的購物車是空的<p></p>
