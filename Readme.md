@@ -210,3 +210,83 @@
     ```php
     $_SESSION['cart'][$_POST['id']] = $_POST['num'];
     ```
+
+    14. 修改第一次登入會員直接點選購物車的問題
+
+        看了程式碼 : $session['cart'] 的定義，
+        是在點選數量，並購買時候才會產生，
+        這時會導入購物車頁面，如果沒有先購買，
+        直接點選購物車，$session['cart']並不會被定義
+        所以修改了foreach 上一層判斷 
+        if(isset($session['cart']))才foreach
+
+    ```php
+
+    <?php  
+    if(isset($_SESSION['cart'])){
+    foreach($_SESSION['cart'] as $id => $qt){
+        $row = $Goods->find($id);
+    ?>
+    <tr class="ct pp content">
+        <td><?=$row['no']?></td>
+        <td><?=$row['name']?></td>
+        <td class="num">
+            <input type="text" id="<?=$id?>" value="<?=$qt?>" onchange="getNum(<?=$row['id']?>)">
+        </td>
+        <td><?=$row['stock']?></td>
+        <td><?=$row['price']?></td>
+        <td><?=$row['price']*$qt?></td>
+        <td>
+            <img src="icon/0415.jpg" class="cu" onclick="remove(this,<?=$row['id']?>)">
+        </td>
+    </tr>
+    <?php } } ?>
+    ```
+    為了搭配 ， 使用者在登入會員時候，會直接點選購物車
+    下方的按鈕也要增加條件判斷
+
+    ```php
+<div class="ct ord">
+    <?php
+    if(empty($qt) || !isset($_SESSION['cart'])){
+    ?>
+        <br>您的購物車是空的<p></p>
+        <a href="index.php"><img src="icon/0411.jpg" class="bbt"></a>
+    <?php }else{ ?>
+        <a href="index.php"><img src="icon/0411.jpg" class="bbt"></a>
+        <a href="?do=ord"><img src="icon/0412.jpg" class="bbt"></a>
+    <?php } ?>
+</div>
+    ```
+
+    ## 名稱也做了修改
+
+    ```js
+        function getNum(id){
+        let num = $('#'+id).val()
+        $.post("api/num.php",{id,num})
+        let url = new URL(window.location.href);
+        url.searchParams.set('qt', num);
+        history.pushState(null, null, url.toString());
+        }
+        
+        function remove(dom,id){
+        let div = `
+                    <br>您的購物車是空的<p></p>
+                    <a href="index.php">
+                        <img src="icon/0411.jpg" class="bbt">
+                    </a>
+                    `
+        $.post("api/remove.php",{id},()=>{
+            $(dom).parents('tr').remove()
+            history.pushState(null,null,'?do=cart')
+            let table = $('.all')
+            let row = table.find('countent')
+            if(row.length == 0){
+                $('.ord').remove().append(div)
+            }
+        })
+        }
+    ```
+
+    ## 考試的時候，這一段不要+了，時間會來不急

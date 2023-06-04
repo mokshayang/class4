@@ -31,6 +31,7 @@ if(!isset($_SESSION['mem'])){
     if(isset($_SESSION['cart'])){
     foreach($_SESSION['cart'] as $id => $qt){
         $row = $Goods->find($id);
+        $total[]=$qt;
     ?>
     <tr class="ct pp content">
         <td><?=$row['no']?></td>
@@ -47,9 +48,9 @@ if(!isset($_SESSION['mem'])){
     </tr>
     <?php } } ?>
 </table>
-<div class="ct ord">
+<div class="ct" id="ord">
     <?php
-    if(empty($qt) || !isset($_SESSION['cart'])){
+    if(empty($total) || !isset($_SESSION['cart'])){
     ?>
         <br>您的購物車是空的<p></p>
         <a href="index.php"><img src="icon/0411.jpg" class="bbt"></a>
@@ -77,10 +78,11 @@ if(!isset($_SESSION['mem'])){
             $(dom).parents('tr').remove()
             history.pushState(null,null,'?do=cart')
             let table = $('.all')
-            let row = table.find('countent')
+            let row = table.find('.content')
             if(row.length == 0){
-                $('.ord').remove().append(div)
+                $('#ord').remove().append(div)
             }
+            location.reload();
         })
     }
 </script>
