@@ -30,7 +30,9 @@ if (!isset($_SESSION['mem'])) {
         <tr class="ct pp content">
             <td><?= $row['no'] ?></td>
             <td><?= $row['name'] ?></td>
-            <td><?= $qt ?></td>
+            <td>
+                <input type="text" id="<?=$id?>" value="<?=$qt?>" onchange="num(<?=$id?>)" style="width:40px;">
+            </td>
             <td><?= $row['stock'] ?></td>
             <td><?= $row['price'] ?></td>
             <td><?= $row['price'] * $qt ?></td>
@@ -56,6 +58,11 @@ if (!isset($_SESSION['mem'])) {
 
 
 <script>
+        function num(id){
+        let num = $('#'+id).val();
+        console.log(num);
+        $.post("api/num.php",{id,num})
+    }
     function remove(dom, id) {
         let div = `
         <br> 您的購物車是空的 <br><br>
@@ -63,9 +70,7 @@ if (!isset($_SESSION['mem'])) {
                     <img src="icon/0411.jpg" class="cu" style="width:100px">
                 </a>
                 `
-        $.post("api/remove.php", {
-            id
-        }, () => {
+        $.post("api/remove.php", {id}, () => {
             $(dom).parents('tr').remove();
             history.pushState(null, null, "?do=cart");
             let table = $('.all');
