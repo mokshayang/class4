@@ -9,7 +9,7 @@ if (!isset($_SESSION['mem'])) {
 
 ?>
 <style>
-    .num {
+    .num input{
         border: 0;
         background-color: transparent;
     }
@@ -29,15 +29,11 @@ if (!isset($_SESSION['mem'])) {
     <?php
     foreach ($_SESSION['cart'] as $id => $qt) {
         $row = $Goods->find($id);
-        // // 檢查是否已經在 $_SESSION['cart'] 中，如果不在，則添加該商品
-        // if (!isset($_SESSION['cart'][$id])) {
-        //     $_SESSION['cart'][$id] = $qt;
-        // }
     ?>
         <tr class="ct pp content">
             <td><?= $row['no'] ?></td>
             <td><?= $row['name'] ?></td>
-            <td>
+            <td class="num">
                 <input type="text" id="<?= $id ?>" value="<?= $qt ?>" onchange="num(<?= $id ?>)" style="width:40px;">
             </td>
             <td><?= $row['stock'] ?></td>
@@ -67,11 +63,7 @@ if (!isset($_SESSION['mem'])) {
 <script>
     function num(id) {
         let num = $('#' + id).val();
-        console.log(num);
-        $.post("api/num.php", {
-            id,
-            num
-        })
+        $.post("api/num.php", {id,num})
     }
 
     function remove(dom, id) {

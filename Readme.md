@@ -124,3 +124,81 @@
             * 由于 AJAX 請求是非同步操作，可能在請求完成之前的短暂延遲
             * remove() 函數中 $('#sub').empty().append(div) 时，而此時可能仍然存在 .content 元素。
     註 : 上課時有提過，寫出來 + 深印象
+
+13. 前端新增 : 
+    1. 可以在購物車中，更改數量，符合使用者體驗。
+    2. 這樣前輩說: 這個購物車系統，差付費系統API，UI漂亮點就可以用了
+
+    ## 更改項目 :
+    ```html
+    <?php
+        foreach ($_SESSION['cart'] as $id => $qt) {
+        $row = $Goods->find($id);
+    ?>
+        <tr class="ct pp content">
+            <td><?= $row['no'] ?></td>
+            <td><?= $row['name'] ?></td>
+            <td class="num">
+                <input type="text" id="<?= $id ?>" value="<?= $qt ?>" onchange="num(<?= $id ?>)" style="width:40px;">
+            </td>
+            <td><?= $row['stock'] ?></td>
+            <td><?= $row['price'] ?></td>
+            <td><?= $row['price'] * $qt ?></td>
+            <td class="num">
+                <img src="icon/0415.jpg" class="cu" onclick="remove(this,<?= $row['id'] ?>)">
+            </td>
+        </tr>
+    <?php } ?>
+    <!-- 修改了 :  -->
+    <td class="num">
+        <input type="text" id="<?= $id ?>" value="<?= $qt ?>" onchange="num(<?= $id ?>)" style="width:40px;">
+    </td>
+    ```
+    ## 在jq:
+    ```js
+        function num(id) {
+        let num = $('#' + id).val();
+        console.log(num);
+        $.post("api/num.php", {id, num})
+    }
+    ```
+    ## api (num.php) 中 :
+    ```php
+    $_SESSION['cart'][$_POST['id']] = $_POST['num'];
+    ```
+    ### 在js中要崁入PHP 還OK，但是PHP中要崁入JS ，好麻煩 !!
+
+    #### 這邊為了抓foreach的$id 的dom :
+
+        * 在設計上 : 為了抓到 foreach 迴圈中的dom 將id設為foreach中的id
+
+        ```html
+        <td class="num">
+        <input type="text" id="<?=$id?>" value="<?=$qt?>" onchange="num(<?=$id?>)" style="width:40px;">
+        </td>
+        ```
+        ### 要注意的是 JS
+
+        ```js
+        let num = $('#' + id).val();
+        // $('#' + id) 這樣id 才會是變數
+        ```
+
+        * 採用了ajax，好處是 : 
+            1. api 中 統一了PHP語言 $.post("api/num.php",{...})...
+            2. 可以重新定義購物車
+        抓到的DOM送出ajax
+
+        ```js
+
+        function num(id) {
+        let num = $('#' + id).val();
+        $.post("api/num.php", {id,num})
+        }
+        ```
+        api :
+
+        ```php
+        $_SESSION['cart'][$_POST['id']] = $_POST['num'];
+
+        ```

@@ -11,7 +11,7 @@ $row = $Mem->find(['acc' => $_SESSION['mem']]);
     <tr>
         <td class="ct tt">個人帳號</td>
         <td class="pp">
-            <?= $row['acc'] ?>
+            &nbsp; <?= $row['acc'] ?>
         </td>
     </tr>
     <tr>
