@@ -265,32 +265,34 @@
 
     ## 名稱也做了修改
 
-    ```js
-        function getNum(id){
-        let num = $('#'+id).val()
-        $.post("api/num.php",{id,num})
-        let url = new URL(window.location.href);
-        url.searchParams.set('qt', num);
-        history.pushState(null, null, url.toString());
-        }
+```js
 
-        function remove(dom,id){
-        let div = `
-                    <br>您的購物車是空的<p></p>
-                    <a href="index.php">
-                        <img src="icon/0411.jpg" class="bbt">
-                    </a>
-                    `
-        $.post("api/remove.php",{id},()=>{
-            $(dom).parents('tr').remove()
-            history.pushState(null,null,'?do=cart')
-            let table = $('.all')
-            let row = table.find('countent')
-            if(row.length == 0){
-                $('.ord').remove().append(div)
-            }
-        })
+    function getNum(id){
+    let num = $('#'+id).val()
+    $.post("api/num.php",{id,num})
+    let url = new URL(window.location.href);
+    url.searchParams.set('qt', num);
+    history.pushState(null, null, url.toString());
+    }
+
+    function remove(dom,id){
+    let div = `
+                <br>您的購物車是空的<p></p>
+                <a href="index.php">
+                    <img src="icon/0411.jpg" class="bbt">
+                </a>
+                `
+    $.post("api/remove.php",{id},()=>{
+        $(dom).parents('tr').remove()
+        history.pushState(null,null,'?do=cart')
+        let table = $('.all')
+        let row = table.find('countent')
+        if(row.length == 0){
+            $('.ord').remove().append(div)
         }
-    ```
+    })
+    }
+
+```
 
     ## 考試的時候，這一段不要+了，時間會來不急
