@@ -130,11 +130,11 @@
     2. 這樣前輩說: 這個購物車系統，差付費系統API，UI漂亮點就可以用了
 
     ## 更改項目 :
-    ```html
-    <?php
-        foreach ($_SESSION['cart'] as $id => $qt) {
-        $row = $Goods->find($id);
-    ?>
+    ```php
+        <?php
+            foreach ($_SESSION['cart'] as $id => $qt) {
+            $row = $Goods->find($id);
+        ?>
         <tr class="ct pp content">
             <td><?= $row['no'] ?></td>
             <td><?= $row['name'] ?></td>
@@ -148,10 +148,14 @@
                 <img src="icon/0415.jpg" class="cu" onclick="remove(this,<?= $row['id'] ?>)">
             </td>
         </tr>
-    <?php } ?>
+        <?php } ?>
+        ```
+
     <!-- 修改了 :  -->
     <td class="num">
+
         <input type="text" id="<?= $id ?>" value="<?= $qt ?>" onchange="num(<?= $id ?>)" style="width:40px;">
+
     </td>
     ```
     ## 在jq:
