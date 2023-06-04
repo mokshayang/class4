@@ -131,25 +131,25 @@
 
     ## 更改項目 :
     ```php
-        <?php
-            foreach ($_SESSION['cart'] as $id => $qt) {
-            $row = $Goods->find($id);
-        ?>
-        <tr class="ct pp content">
-            <td><?= $row['no'] ?></td>
-            <td><?= $row['name'] ?></td>
-            <td class="num">
-                <input type="text" id="<?= $id ?>" value="<?= $qt ?>" onchange="num(<?= $id ?>)" style="width:40px;">
-            </td>
-            <td><?= $row['stock'] ?></td>
-            <td><?= $row['price'] ?></td>
-            <td><?= $row['price'] * $qt ?></td>
-            <td class="num">
-                <img src="icon/0415.jpg" class="cu" onclick="remove(this,<?= $row['id'] ?>)">
-            </td>
-        </tr>
-        <?php } ?>
-        ```
+    <?php
+        foreach ($_SESSION['cart'] as $id => $qt) {
+        $row = $Goods->find($id);
+    ?>
+    <tr class="ct pp content">
+        <td><?= $row['no'] ?></td>
+        <td><?= $row['name'] ?></td>
+        <td class="num">
+            <input type="text" id="<?= $id ?>" value="<?= $qt ?>" onchange="num(<?=$id ?>)" style="width:40px;">
+        </td>
+        <td><?= $row['stock'] ?></td>
+        <td><?= $row['price'] ?></td>
+        <td><?= $row['price'] * $qt ?></td>
+        <td class="num">
+            <img src="icon/0415.jpg" class="cu" onclick="remove(this,<?= $ro['id'] ?>)">
+        </td>
+    </tr>
+    <?php } ?>
+    ```
 
     <!-- 修改了 :  -->
     <td class="num">
@@ -160,10 +160,10 @@
     ```
     ## 在jq:
     ```js
-        function num(id) {
-        let num = $('#' + id).val();
-        console.log(num);
-        $.post("api/num.php", {id, num})
+    function num(id) {
+    let num = $('#' + id).val();
+    console.log(num);
+    $.post("api/num.php", {id, num})
     }
     ```
     ## api (num.php) 中 :
