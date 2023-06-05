@@ -3,10 +3,6 @@ $row = $Ord->find(['id'=>$_GET['id']]);
 $cart = unserialize($row['cart']);
 ?>
 <h2 class="ct">訂單編號<?=$row['no']?>的詳細資料</h2>
-<?php
-$row = $Mem->find(['acc' => $_SESSION['mem']]);
-?>
-
 <style>
 .all{
     margin: -1px auto;
