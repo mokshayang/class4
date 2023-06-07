@@ -57,9 +57,11 @@
             </td>
         </tr>
     </table>
-    <input type="submit" value="新增"> |
-    <input type="reset" value="重置"> |
-    <button onclick="history.go(-1)" type="button">返回</button>
+    <div class="ct">
+        <input type="submit" value="新增"> |
+        <input type="reset" value="重置"> |
+        <button onclick="history.go(-1)" type="button">返回</button>
+    </div>
 </form>
 <script>
     $('#big').load("api/type_bm.php",{parent:0},()=>{
