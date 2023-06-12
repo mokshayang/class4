@@ -324,6 +324,7 @@
     $rows = $Goods->all();
     foreach ($rows as $row) {
     ?>
+    // tr 增加 class name "find"
         <tr class="ct pp find">
             <td><?= $row['no'] ?></td>
             <td><?= $row['name'] ?></td>
@@ -373,4 +374,6 @@
         });
     }
 </script>
+
 ```
+
