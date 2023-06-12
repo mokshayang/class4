@@ -75,7 +75,8 @@
         </div>
         <div id="right">
             <?php
-            $do = $_GET['do'] ?? "main";
+            $do = isset($_GET['do']) ? $_GET['do'] : "main"; // php 5.6
+            // $do = $_GET['do'] ?? "main";
             $file = "front/$do.php";
             if (file_exists($file)) {
                 include_once $file;

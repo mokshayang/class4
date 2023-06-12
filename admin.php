@@ -40,7 +40,8 @@ $pr = unserialize($row['pr']);
 		</div>
 		<div id="right">
 		<?php
-            $do = $_GET['do'] ?? "admin";
+		 	$do = isset($_GET['do']) ? $_GET['do'] : "admin"; // php 5.6
+            // $do = $_GET['do'] ?? "admin";
             $file = "back/$do.php";
             if(file_exists($file)){
                 include_once $file;
