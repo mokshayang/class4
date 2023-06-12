@@ -78,6 +78,7 @@ $cart = unserialize($row['cart']);
         <td> 總價: <?=$sum?> </td>
     </tr>
 </table>
+<br>
 <div class="ct">
     <button onclick="of('?do=ord')">返回</button>
 </div>

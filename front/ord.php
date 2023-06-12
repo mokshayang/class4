@@ -72,6 +72,7 @@ $row = $Mem->find(['acc' => $_SESSION['mem']]);
         </td>
     </tr>
 </table>
+<br>
 <div class="ct">
     <button onclick="ord()">確定送出</button>
     <button onclick="of('?do=cart')">返回修改訂單</button>

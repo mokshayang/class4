@@ -1,4 +1,4 @@
-
+<h2 class="ct">管理者登入</h2>
 <table class="all">
     <tr>
         <td class="tt ct">帳號</td>

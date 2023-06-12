@@ -1,8 +1,9 @@
 <h2>第一次購買</h2>
-<a href="?do=reg()">
+<a href="?do=reg">
     <img src="icon/0413.jpg" alt="">
 </a>
-<h2>會員登入</h2>
+<br>
+<h2 class="ct">會員登入</h2>
 <table class="all">
     <tr>
         <td class="tt ct">帳號</td>

@@ -8,7 +8,7 @@ if(!isset($_SESSION['mem'])){
 ?>
 <style>
     .num input{
-        order:0;
+        border: 0;
         background-color: transparent;
         width: 40px;
     }
