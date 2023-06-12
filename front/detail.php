@@ -3,7 +3,7 @@ $row = $Goods->find($_GET['id']);
 $str = $Type->find(['id'=>$row['big']])['name'] ;
 $str .= " > ";
 $str .= $Type->find(['id'=>$row['mid']])['name'] ;
-echo $str;
+
 ?>
 <h2><?=$row['name']?></h2>
 <style>
@@ -46,6 +46,7 @@ echo $str;
     </div>
 </div>
 <div class="icon tt">
+    購買數量 
     <input type="number" name="" id="qt" value="1">
     <img src="icon/0402.jpg" onclick="cart()">
 </div>
