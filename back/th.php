@@ -117,7 +117,7 @@
             $(dom).parent().prev().text((type == 1)?'販售中':'已下架')
         })
     }
-
+    // 雙each
     function searchTable() {
         const keyword = $('#searchInput').val().toLowerCase();
 
@@ -132,6 +132,7 @@
                     found = true;
                     return false; // 跳出内部的each循环
                 }
+                // 跳出 td 在seach tr($('.find')
             });
 
             if (found) {

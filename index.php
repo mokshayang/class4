@@ -55,14 +55,14 @@
                 foreach ($bb as $b) {
                     echo "<div class='ww'>";
                     echo "<a href='?type={$b['id']}'>{$b['name']}({$Goods->count(['big' =>$b['id'], 'sh' => 1])})</a>";
-                    if ($Type->count(['parent' => $b['id']])) {
+                   
                         $mm = $Type->all(['parent' => $b['id']]);
                         foreach ($mm as $m) {
                             echo "<div class='s'>";
                             echo "<a href='?type={$m['id']}'>{$m['name']}({$Goods->count(['mid' =>$m['id'], 'sh' => 1])})</a>";
                             echo "</div>";
                         }
-                    }
+                    
                     echo "</div>";
                 }
                 ?>

@@ -47,7 +47,7 @@ $str .= $Type->find(['id'=>$row['mid']])['name'] ;
 </div>
 <div class="icon tt">
     購買數量 
-    <input type="number" name="" id="qt" value="1">
+    <input type="number" name="" id="qt" value="1" min=1>
     <img src="icon/0402.jpg" onclick="cart()">
 </div>
 <script>
@@ -55,4 +55,22 @@ $str .= $Type->find(['id'=>$row['mid']])['name'] ;
         let qt = $('#qt').val();
         of(`?do=cart&id=<?=$row['id']?>&qt=${qt}`)
     }
+    // 數量防呆
+
+    $("input[type='number']").each(function() {
+        if (isNaN(parseFloat($(this).val())) || parseFloat($(this).val()) < 1) {
+            $(this).val(1);
+        }
+    });
+
+    // 监听输入字段的变化事件
+    $("input[type='number']").on("change", function() {
+        var inputValue = parseFloat($(this).val());
+        
+        if (isNaN(inputValue) || inputValue < 1) {
+            alert("请输入有效的数字，最小值为1。");
+            $(this).val(1); // 将输入值重置为最小值
+        }
+    });
+
 </script>
