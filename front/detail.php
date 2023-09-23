@@ -56,19 +56,18 @@ $str .= $Type->find(['id'=>$row['mid']])['name'] ;
         of(`?do=cart&id=<?=$row['id']?>&qt=${qt}`)
     }
     // 數量防呆
-
     $("input[type='number']").each(function() {
         if (isNaN(parseFloat($(this).val())) || parseFloat($(this).val()) < 1) {
             $(this).val(1);
         }
     });
 
-    // 监听输入字段的变化事件
+    // 加入監聽
     $("input[type='number']").on("change", function() {
         var inputValue = parseFloat($(this).val());
         
         if (isNaN(inputValue) || inputValue < 1) {
-            alert("请输入有效的数字，最小值为1。");
+            alert("請輸入有效數量，最小值 1");
             $(this).val(1); // 将输入值重置为最小值
         }
     });

@@ -3,7 +3,7 @@
 <form action="api/news.php" method="post">
     <table class="all">
         <tr class="ct tt">
-            <td>標題內容</td>
+            <td>內容編輯</td>
             <td>顯示</td>
             <td>操作</td>
         </tr>
@@ -22,7 +22,7 @@
 
                 </td>
                 <td>
-                    <button type="button" onclick="adDel(this,<?= $row['id'] ?>)">刪除</button>
+                    <button type="button" onclick="del(this,'ad',<?= $row['id'] ?>)">刪除</button>
 
                 </td>
                 <input type="hidden" name="id[]" value="<?= $row['id'] ?>">
@@ -31,8 +31,7 @@
         <?php } ?>
     </table>
     <div class='ct'>
-        <input type='submit' value='編輯'> |
-        <input type='reset' value='重置'>
+        <input type='submit' value='確定'>
     </div>
 </form>
 <script>
@@ -46,22 +45,14 @@
                             <input type="checkbox" name="sh[]" checked disabled="true">
                         </td>
                         <td>
-                            <button type="button" onclick="newDel(this)">刪除</button>
+                            <button type="button" onclick="addDel(this)">刪除</button>
                         </td>
                     </tr>
                 `;
         $('.all').append(div);
     }
 
-    function adDel(dom, id) {
-        $.post("api/ad_del.php", {
-            id
-        }, () => {
-            $(dom).parents('tr').remove();
-        })
-    }
-
-    function newDel(dom) {
+    function addDel(dom) {
         $(dom).parents('tr').remove();
     }
 </script>

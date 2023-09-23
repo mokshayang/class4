@@ -29,7 +29,7 @@
         <td><?=$b['name']?></td>
         <td>
             <button onclick="edit(this,<?=$b['id']?>)">修改</button>
-            <button onclick="del('type',<?=$b['id']?>)">刪除</button>
+            <button onclick="del(this,'type',<?=$b['id']?>)">刪除</button>
         </td>
     </tr>
     <?php
@@ -40,7 +40,7 @@
         <td><?=$m['name']?></td>
         <td>
             <button onclick="edit(this,<?=$m['id']?>)">修改</button>
-            <button onclick="del('type',<?=$m['id']?>)">刪除</button>
+            <button onclick="del(this,'type',<?=$m['id']?>)">刪除</button>
         </td>
     </tr>
     <?php }} ?>
@@ -104,7 +104,7 @@
         <td><?=($row['sh']==1)?'販售中':'已下架'?></td>
         <td>
             <button onclick="of('?do=goods_edit&id=<?=$row['id']?>')">修改</button>
-            <button onclick="del('goods',<?=$row['id']?>)">刪除</button>
+            <button onclick="del(this,'goods',<?=$row['id']?>)">刪除</button>
             <button onclick="sh(1,this,<?=$row['id']?>)">上架</button>
             <button onclick="sh(2,this,<?=$row['id']?>)">下架</button>
         </td>

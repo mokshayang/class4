@@ -21,7 +21,7 @@
                 }else{
                 ?>
                 <button onclick="of('?do=admin_edit&id=<?= $row['id'] ?>')">修改</button>
-                <button onclick="del('admin',<?=$row['id']?>)">刪除</button>
+                <button onclick="del(this,'admin',<?=$row['id']?>)">刪除</button>
             </td>
         </tr>
     <?php } }?>

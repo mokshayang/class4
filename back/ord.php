@@ -21,7 +21,7 @@
         <td><?=$row['name']?></td>
         <td><?=$row['date']?></td>
         <td>
-            <button type="button" onclick="del('ord',<?=$row['id']?>)">刪除</button>
+            <button type="button" onclick="del(this,'ord',<?=$row['id']?>)">刪除</button>
         </td>
     </tr>
     <?php } ?>
